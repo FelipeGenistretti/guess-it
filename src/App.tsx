@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
+
+import { WORDS } from './utils/words'
+import type { Challenge } from './utils/words'
 import './App.css'
 import { Header } from './components/Header'
 import { Tip } from './components/Header/Tip'
@@ -9,9 +13,22 @@ import { LettersUsed } from './components/LettersUsed'
 
 function App() {
 
+  const [challenge, setChallenge] = useState<Challenge | null>(null)
+
   function handleRestartGame(){
     alert("reinciar o jogo")
   }
+
+  function startGame(){
+    const index = Math.floor(Math.random() * WORDS.length)
+    const randomWord = WORDS[index]
+    setChallenge(randomWord)
+    
+  }
+
+  useEffect(()=>{
+    startGame()
+  }, [])
 
 
   return (
